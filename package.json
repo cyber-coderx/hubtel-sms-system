@@ -1,0 +1,42 @@
+{
+  "name": "hubtel-sms-system",
+  "version": "1.0.0",
+  "description": "Production-ready SMS messaging system using Hubtel SMS API",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/",
+    "format": "prettier --write src/"
+  },
+  "keywords": [
+    "sms",
+    "messaging",
+    "hubtel",
+    "bulk-sms",
+    "express"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express-rate-limit": "^6.7.0",
+    "joi": "^17.9.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3",
+    "eslint": "^8.42.0",
+    "prettier": "^2.8.8"
+  }
+}

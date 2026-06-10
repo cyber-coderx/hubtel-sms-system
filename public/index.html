@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Dashboard - Hubtel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📱 Hubtel SMS Dashboard</h1>
+            <p>Send and manage SMS messages easily</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('send')">Send SMS</button>
+            <button class="tab-btn" onclick="showTab('history')">History</button>
+            <button class="tab-btn" onclick="showTab('stats')">Statistics</button>
+        </div>
+
+        <!-- Status Message -->
+        <div class="status-message" id="statusMessage"></div>
+
+        <!-- Tab 1: Send SMS -->
+        <div class="tab-content active" id="send">
+            <div class="card">
+                <h2>Send SMS Message</h2>
+
+                <!-- Single SMS -->
+                <div class="form-section">
+                    <h3>Single Message</h3>
+                    
+                    <div class="form-group">
+                        <label for="singleTo">Recipient Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="singleTo" 
+                            placeholder="+233123456789"
+                            value=""
+                        >
+                        <small>Use E164 format: +[country][number]</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="singleFrom">Sender ID</label>
+                        <input 
+                            type="text" 
+                            id="singleFrom" 
+                            placeholder="MYAPP"
+                            maxlength="11"
+                            value="MYAPP"
+                        >
+                        <small>Max 11 alphanumeric characters</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="singleContent">Message Content</label>
+                        <textarea 
+                            id="singleContent" 
+                            placeholder="Type your message here..."
+                            maxlength="160"
+                            rows="4"
+                        ></textarea>
+                        <small>
+                            <span id="charCount">0</span>/160 characters
+                            <span id="smsCount">(1 SMS)</span>
+                        </small>
+                    </div>
+
+                    <button class="btn-primary" onclick="sendSingleSMS()">
+                        Send SMS
+                    </button>
+                </div>
+
+                <!-- Bulk SMS -->
+                <div class="form-section">
+                    <h2>Bulk Message</h2>
+                    
+                    <div class="form-group">
+                        <label for="bulkRecipients">Recipients (one per line)</label>
+                        <textarea 
+                            id="bulkRecipients" 
+                            placeholder="+233123456789&#10;+233987654321&#10;+233555555555"
+                            rows="6"
+                        ></textarea>
+                        <small id="recipientCount">0 recipients</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bulkFrom">Sender ID</label>
+                        <input 
+                            type="text" 
+                            id="bulkFrom" 
+                            placeholder="MYAPP"
+                            maxlength="11"
+                            value="MYAPP"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bulkContent">Message Content</label>
+                        <textarea 
+                            id="bulkContent" 
+                            placeholder="Type your message here..."
+                            maxlength="160"
+                            rows="4"
+                        ></textarea>
+                        <small>
+                            <span id="bulkCharCount">0</span>/160 characters
+                        </small>
+                    </div>
+
+                    <button class="btn-primary" onclick="sendBulkSMS()">
+                        Send to All Recipients
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: History -->
+        <div class="tab-content" id="history">
+            <div class="card">
+                <h2>Message History</h2>
+                <button class="btn-secondary" onclick="loadHistory()">Refresh</button>
+                
+                <div class="table-responsive">
+                    <table id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>To</th>
+                                <th>Content</th>
+                                <th>Status</th>
+                                <th>Cost</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyBody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 20px;">
+                                    Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Statistics -->
+        <div class="tab-content" id="stats">
+            <div class="card">
+                <h2>SMS Statistics</h2>
+                <button class="btn-secondary" onclick="loadStats()">Refresh</button>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Messages</h3>
+                        <p class="stat-number" id="statTotal">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Sent</h3>
+                        <p class="stat-number" id="statSent">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Delivered</h3>
+                        <p class="stat-number" id="statDelivered">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Failed</h3>
+                        <p class="stat-number" id="statFailed">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Delivery Rate</h3>
+                        <p class="stat-number" id="statRate">0%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Cost</h3>
+                        <p class="stat-number" id="statCost">$0.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
